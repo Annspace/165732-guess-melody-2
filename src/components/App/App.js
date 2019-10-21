@@ -2,7 +2,8 @@ import React from "react";
 import WelcomeScreen from "../WelcomeScreen/WelcomeScreen";
 
 const App = () => {
-  return <WelcomeScreen time={7} errors={4} />;
+  const clickStart = () => {};
+  return <WelcomeScreen time={7} errors={4} clickHandler={clickStart}/>;
 };
 
 export default App;
