@@ -8,9 +8,6 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
     const {time, errors, questions} = props;
-    this.clickStartHandler = this.clickStartHandler.bind(this);
-    this.clickAnswerHandler = this.clickAnswerHandler.bind(this);
-    // приходят данные только для одного типа игры (либо artist, либо genre)
     this.state = {
       time,
       errors,
@@ -19,14 +16,14 @@ class App extends PureComponent {
       questionNumber: 0,
     };
   }
-  clickStartHandler() {
+  clickStartHandler = () => {
     const {questions} = this.props;
     const {questionNumber} = this.state;
     this.setState({
       type: questions[questionNumber].type,
     });
-  }
-  clickAnswerHandler() {
+  };
+  clickAnswerHandler = () => {
     const {questions, questionNumber} = this.state;
     if (questions.length - 1 > questionNumber) {
       this.setState((prevState) => {
@@ -44,7 +41,7 @@ class App extends PureComponent {
         };
       });
     }
-  }
+  };
   render() {
     const {time, errors, questions, type, questionNumber} = this.state;
     return (

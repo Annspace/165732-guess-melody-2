@@ -23,6 +23,5 @@ it(`Guess Genre form submit returns correct data`, () => {
     preventDefault: () => {},
   };
   formGenre.simulate(`submit`, mockedEvent);
-  // проверка на то что отработал preventDefault
   expect(clickAnswer).toHaveReturnedWith({'answer-1': `answer-1`, 'answer-2': `answer-2`, 'answer-3': `answer-3`});
 });

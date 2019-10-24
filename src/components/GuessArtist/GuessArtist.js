@@ -2,9 +2,6 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
 class GuessArtist extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const {answers, questionText, onClickAnswer, screenIndex} = this.props;
     return (
