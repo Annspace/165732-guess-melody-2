@@ -4,7 +4,7 @@ exports[`renders correctly 1`] = `
 Array [
   <button
     className="track__button track__button--pause"
-    onClick={[Function]}
+    onClick={[MockFunction]}
     type="button"
   />,
   <div

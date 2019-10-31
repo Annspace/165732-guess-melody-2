@@ -42,6 +42,7 @@ class GuessGenre extends PureComponent {
           <form className="game__tracks"
             onSubmit={(event) => {
               event.preventDefault();
+              this.setState({playingTrack: -1});
               onClickAnswer(event);
             }
             }>

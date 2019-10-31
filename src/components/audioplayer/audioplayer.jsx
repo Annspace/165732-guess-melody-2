@@ -5,9 +5,8 @@ class AudioPlayer extends PureComponent {
   constructor(props) {
     super(props);
     this.audioRef = React.createRef();
-    const {playing} = this.props;
     this.state = {
-      playing,
+      playing: false,
       progress: 0,
     };
   }
@@ -24,7 +23,7 @@ class AudioPlayer extends PureComponent {
       });
     };
     audio.ontimeupdate = () => this.setState({
-      progress: this.audioRef.current.currentTime
+      progress: audio.currentTime
     });
   }
 
@@ -45,19 +44,11 @@ class AudioPlayer extends PureComponent {
     this.audioRef.current.src = ``;
   }
 
-  onClickTrackButton = () => {
-    const {onClickTrackButton} = this.props;
-    // обновляет props
-    onClickTrackButton();
-    // последующий код срабатывает перед тем как обновились props,
-    // поэтому обращение к props.playing только в componentDidUpdate
-  };
-
   render() {
-    const {src, playing} = this.props;
+    const {src, playing, onClickTrackButton} = this.props;
     return (
       <>
-        <button onClick={this.onClickTrackButton} className={`track__button track__button--${playing ? `pause` : `play`}`} type="button"/>
+        <button onClick={onClickTrackButton} className={`track__button track__button--${playing ? `pause` : `play`}`} type="button"/>
         <div className="track__status">
           <audio ref={this.audioRef} src={src}/>
         </div>
