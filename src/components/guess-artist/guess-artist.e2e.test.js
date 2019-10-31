@@ -1,6 +1,6 @@
 import React from "react";
 import {shallow} from 'enzyme';
-import GuessArtist from "./GuessArtist";
+import GuessArtist from "./guess-artist.jsx";
 import mockData from "../../mocks/questions";
 
 it(`Guess Artist form onchange returns correct data`, () => {
@@ -9,7 +9,8 @@ it(`Guess Artist form onchange returns correct data`, () => {
     screenIndex={0}
     questionText={mockData.questionsData[0].questionText}
     onClickAnswer={clickAnswer}
-    answers={mockData.questionsData[0].answers}/>);
+    answers={mockData.questionsData[0].answers}
+    song={mockData.questionsData[0].song}/>);
   const formArtist = GuessArtistComponent.find(`form.game__artist`);
   const mockedEvent = {target: {value: `answer-1`}};
   formArtist.simulate(`change`, mockedEvent);

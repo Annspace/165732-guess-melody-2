@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <button
+    className="track__button track__button--pause"
+    onClick={[Function]}
+    type="button"
+  />,
+  <div
+    className="track__status"
+  >
+    <audio
+      src="https://es31-server.appspot.com/guess-melody/static/music/Whaling_City.mp3"
+    />
+  </div>,
+]
+`;

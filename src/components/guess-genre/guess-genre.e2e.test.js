@@ -1,6 +1,6 @@
 import React from "react";
 import {shallow} from 'enzyme';
-import GuessGenre from "./GuessGenre";
+import GuessGenre from "./guess-genre.jsx";
 import mockData from "../../mocks/questions";
 
 it(`Guess Genre form submit returns correct data`, () => {
@@ -13,9 +13,9 @@ it(`Guess Genre form submit returns correct data`, () => {
   });
   const GuessGenreComponent = shallow(<GuessGenre
     screenIndex={0}
-    questionText={mockData.questionsData[0].questionText}
+    questionText={mockData.questionsData[3].questionText}
     onClickAnswer={clickAnswer}
-    answers={mockData.questionsData[0].answers}/>);
+    answers={mockData.questionsData[3].answers}/>);
   const formGenre = GuessGenreComponent.find(`form.game__tracks`);
   // выбор трёх ответов
   const mockedEvent = {

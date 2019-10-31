@@ -1,7 +1,14 @@
-import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
+import AudioPlayer from '../audioplayer/audioplayer.jsx';
 
 class GuessGenre extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      playingTrack: -1,
+    };
+  }
   render() {
     const {answers, questionText, onClickAnswer, screenIndex} = this.props;
     return (
@@ -42,10 +49,12 @@ class GuessGenre extends PureComponent {
               answers.map((answer, index) =>{
                 return (
                   <div className="track" key={screenIndex + `-answer-` + index}>
-                    <button className="track__button track__button--play" type="button"/>
-                    <div className="track__status">
-                      <audio/>
-                    </div>
+                    <AudioPlayer
+                      playing={this.state.playingTrack === index}
+                      src={answer.src}
+                      onClickTrackButton={() => {
+                        this.setState({playingTrack: this.state.playingTrack === index ? -1 : index});
+                      }}/>
                     <div className="game__answer">
                       <input className="game__input visually-hidden" type="checkbox" name={`answer-` + (index + 1)} value={`answer-` + (index + 1)}
                         id={`answer-` + (index + 1)}/>

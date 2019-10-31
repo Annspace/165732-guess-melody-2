@@ -1,9 +1,16 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import AudioPlayer from '../audioplayer/audioplayer.jsx';
 
 class GuessArtist extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      playing: false,
+    };
+  }
   render() {
-    const {answers, questionText, onClickAnswer, screenIndex} = this.props;
+    const {answers, questionText, onClickAnswer, screenIndex, song} = this.props;
     return (
       <section className="game game--artist">
         <header className="game__header">
@@ -34,10 +41,15 @@ class GuessArtist extends PureComponent {
           <h2 className="game__title">{questionText}</h2>
           <div className="game__track">
             <div className="track">
-              <button className="track__button track__button--play" type="button"/>
-              <div className="track__status">
-                <audio/>
-              </div>
+              <AudioPlayer
+                src={song.src}
+                onClickTrackButton={()=> {
+                  this.setState({
+                    playing: !this.state.playing
+                  });
+                }}
+                playing={this.state.playing}
+              />
             </div>
           </div>
 
@@ -68,6 +80,7 @@ GuessArtist.propTypes = {
   questionText: PropTypes.string.isRequired,
   onClickAnswer: PropTypes.func.isRequired,
   screenIndex: PropTypes.number.isRequired,
+  song: PropTypes.object.isRequired,
 };
 
 export default GuessArtist;
