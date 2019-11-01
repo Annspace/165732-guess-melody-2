@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from "./App";
+import App from "./app";
 import mockData from "../../mocks/questions";
 
 it(`renders correctly`, () => {

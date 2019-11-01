@@ -10,20 +10,20 @@ const mockData = {
       "questionText": `Кто исполняет эту песню?`,
       "song": {
         "artist": `Quincas Moreira`,
-        "src": `https://es31-server.appspot.com/guess-melody/static/music/Blue_Whale.mp3`
+        "src": `https://es31-server.appspot.com/guess-melody/static/music/Whaling_City.mp3`,
       },
       "answers": [
         {
           "picture": `https://es31-server.appspot.com/guess-melody/static/artist/Quincas_Moreira.jpg`,
-          "artist": `Quincas Moreira`
+          "artist": `Quincas Moreira`,
         },
         {
           "picture": `https://es31-server.appspot.com/guess-melody/static/artist/Density_n_Time.jpg`,
-          "artist": `Density & Time`
+          "artist": `Density & Time`,
         },
         {
           "picture": `https://es31-server.appspot.com/guess-melody/static/artist/Endless_Love.jpg`,
-          "artist": `Endless Love`
+          "artist": `Endless Love`,
         }
       ]
     },
@@ -33,7 +33,7 @@ const mockData = {
       "questionText": `Кто исполняет эту песню?`,
       "song": {
         "artist": `Quincas Moreira123`,
-        "src": `https://es31-server.appspot.com/guess-melody/static/music/Blue_Whale.mp3`
+        "src": `https://es31-server.appspot.com/guess-melody/static/music/Whaling_City.mp3`
       },
       "answers": [
         {

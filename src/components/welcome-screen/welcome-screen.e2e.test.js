@@ -1,6 +1,6 @@
 import React from "react";
 import {shallow} from 'enzyme';
-import WelcomeScreen from "./WelcomeScreen";
+import WelcomeScreen from "./welcome-screen.jsx";
 
 it(`Welcome screen click start`, () => {
   const clickStartHandler = jest.fn();

@@ -1,8 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import WelcomeScreen from "../WelcomeScreen/WelcomeScreen";
-import GuessArtist from "../GuessArtist/GuessArtist";
-import GuessGenre from "../GuessGenre/GuessGenre";
+import WelcomeScreen from "../welcome-screen/welcome-screen.jsx";
+import GuessArtist from "../guess-artist/guess-artist.jsx";
+import GuessGenre from "../guess-genre/guess-genre.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -50,7 +50,8 @@ class App extends PureComponent {
           screenIndex={questionNumber}
           questionText={questions[questionNumber].questionText}
           onClickAnswer={this.clickAnswerHandler}
-          answers={questions[questionNumber].answers}/>
+          answers={questions[questionNumber].answers}
+          song={questions[questionNumber].song}/>
         }
         {type === `genre` && <GuessGenre
           screenIndex={questionNumber}
