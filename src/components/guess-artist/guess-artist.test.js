@@ -27,6 +27,8 @@ it(`renders correctly`, () => {
       questionText={mockData.questionsData[0].questionText}
       onClickAnswer={clickAnswer}
       answers={mockData.questionsData[0].answers}
-      song={mockData.questionsData[0].song}/>, options).toJSON();
+      song={mockData.questionsData[0].song}
+      mistakes={2}
+      onEndTimer={clickAnswer}/>, options).toJSON();
   expect(GuessArtistComponent).toMatchSnapshot();
 });

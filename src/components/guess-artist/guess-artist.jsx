@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import AudioPlayer from '../audioplayer/audioplayer.jsx';
+import GameMistakes from "../game-mistakes/game-mistakes.jsx";
+import GameTimer from "../game-timer/game-timer.jsx";
 
 class GuessArtist extends PureComponent {
   constructor(props) {
@@ -10,7 +12,7 @@ class GuessArtist extends PureComponent {
     };
   }
   render() {
-    const {answers, questionText, onClickAnswer, screenIndex, song} = this.props;
+    const {answers, questionText, onClickAnswer, screenIndex, song, mistakes, onEndTimer} = this.props;
     return (
       <section className="game game--artist">
         <header className="game__header">
@@ -19,22 +21,13 @@ class GuessArtist extends PureComponent {
             <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию"/>
           </a>
 
-          {/* <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">*/}
-          {/*  <circle className="timer__line" cx="390" cy="390" r="370"*/}
-          {/*    style="filter: url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"/>*/}
-          {/* </svg>*/}
+          <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
+            <circle className="timer__line" cx={390} cy={390} r={370} style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}} />
+          </svg>
 
-          <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
-            <span className="timer__mins">05</span>
-            <span className="timer__dots">:</span>
-            <span className="timer__secs">00</span>
-          </div>
+          <GameTimer seconds={20} onEndTimer={onEndTimer}/>
 
-          <div className="game__mistakes">
-            <div className="wrong"/>
-            <div className="wrong"/>
-            <div className="wrong"/>
-          </div>
+          <GameMistakes mistakes={mistakes}/>
         </header>
 
         <section className="game__screen">
@@ -53,12 +46,12 @@ class GuessArtist extends PureComponent {
             </div>
           </div>
 
-          <form onChange={onClickAnswer} className="game__artist">
+          <form onChange={(e) => onClickAnswer(e.target.value)} className="game__artist">
             {
               answers.map((answer, index) => {
                 return (
                   <div className="artist" key={screenIndex + `-answer-` + index}>
-                    <input className="artist__input visually-hidden" type="radio" name="answer" value={`answer-` + (index + 1)}
+                    <input className="artist__input visually-hidden" type="radio" name="answer" value={answer.artist}
                       id={`answer-` + (index + 1)}/>
                     <label className="artist__name" htmlFor={`answer-` + (index + 1)}>
                       <img className="artist__picture" src={answer.picture} alt={answer.artist}/>
@@ -81,6 +74,8 @@ GuessArtist.propTypes = {
   onClickAnswer: PropTypes.func.isRequired,
   screenIndex: PropTypes.number.isRequired,
   song: PropTypes.object.isRequired,
+  mistakes: PropTypes.number.isRequired,
+  onEndTimer: PropTypes.func.isRequired,
 };
 
 export default GuessArtist;

@@ -25,6 +25,8 @@ it(`renders correctly`, () => {
       screenIndex={0}
       questionText={mockData.questionsData[4].questionText}
       onClickAnswer={clickAnswer}
-      answers={mockData.questionsData[4].answers}/>, options).toJSON();
+      answers={mockData.questionsData[4].answers}
+      mistakes={2}
+      onEndTimer={clickAnswer}/>, options).toJSON();
   expect(GuessGenreComponent).toMatchSnapshot();
 });

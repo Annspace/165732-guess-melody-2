@@ -1,16 +1,30 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import AudioPlayer from '../audioplayer/audioplayer.jsx';
+import GameMistakes from '../game-mistakes/game-mistakes.jsx';
+import GameTimer from "../game-timer/game-timer.jsx";
 
 class GuessGenre extends PureComponent {
   constructor(props) {
     super(props);
+    const {answers} = props;
     this.state = {
       playingTrack: -1,
+      userAnswers: new Array(answers.length).fill(false),
     };
   }
+  checkAnswerHandler = (index) => {
+    const {userAnswers} = this.state;
+    const updatedAnswers = userAnswers;
+    updatedAnswers[index] = !updatedAnswers[index];
+    this.setState({
+      userAnswers: updatedAnswers,
+    });
+  };
+
   render() {
-    const {answers, questionText, onClickAnswer, screenIndex} = this.props;
+    const {answers, questionText, onClickAnswer, screenIndex, mistakes, onEndTimer} = this.props;
+    const {userAnswers} = this.state;
     return (
       <section className="game game--genre">
         <header className="game__header">
@@ -19,22 +33,13 @@ class GuessGenre extends PureComponent {
             <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию"/>
           </a>
 
-          {/* <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">*/}
-          {/*  <circle className="timer__line" cx="390" cy="390" r="370"*/}
-          {/*          style="filter: url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"/>*/}
-          {/* </svg>*/}
+          <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
+            <circle className="timer__line" cx={390} cy={390} r={370} style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}} />
+          </svg>
 
-          <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
-            <span className="timer__mins">05</span>
-            <span className="timer__dots">:</span>
-            <span className="timer__secs">00</span>
-          </div>
+          <GameTimer seconds={20} onEndTimer={onEndTimer}/>
 
-          <div className="game__mistakes">
-            <div className="wrong"></div>
-            <div className="wrong"></div>
-            <div className="wrong"></div>
-          </div>
+          <GameMistakes mistakes={mistakes}/>
         </header>
 
         <section className="game__screen">
@@ -42,8 +47,11 @@ class GuessGenre extends PureComponent {
           <form className="game__tracks"
             onSubmit={(event) => {
               event.preventDefault();
-              this.setState({playingTrack: -1});
-              onClickAnswer(event);
+              this.setState({
+                playingTrack: -1,
+                userAnswers: new Array(answers.length).fill(false),
+              });
+              onClickAnswer(userAnswers);
             }
             }>
             {
@@ -57,9 +65,9 @@ class GuessGenre extends PureComponent {
                         this.setState({playingTrack: this.state.playingTrack === index ? -1 : index});
                       }}/>
                     <div className="game__answer">
-                      <input className="game__input visually-hidden" type="checkbox" name={`answer-` + (index + 1)} value={`answer-` + (index + 1)}
-                        id={`answer-` + (index + 1)}/>
-                      <label className="game__check" htmlFor={`answer-` + (index + 1)}>Отметить</label>
+                      <input className="game__input visually-hidden" type="checkbox" name="answer"
+                        value={`answer-${index}`} id={`answer-${index}`} onChange={() => this.checkAnswerHandler(index)}/>
+                      <label className="game__check" htmlFor={`answer-` + (index)}>Отметить</label>
                     </div>
                   </div>
                 );
@@ -77,7 +85,9 @@ GuessGenre.propTypes = {
   answers: PropTypes.array.isRequired,
   questionText: PropTypes.string.isRequired,
   onClickAnswer: PropTypes.func.isRequired,
+  onEndTimer: PropTypes.func.isRequired,
   screenIndex: PropTypes.number.isRequired,
+  mistakes: PropTypes.number.isRequired,
 };
 
 export default GuessGenre;
